@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 public class Main {
     private static int[][] pages;
+    private static int[][] pagesCopy;
 
     private static int walkThroughAllPaths(int[] pageData) {
-        int num = 99999;
+        int num = 999999999;
         for(int i=1;i<pageData.length;i++) {
+            pagesCopy[pageData[i] - 1] = null;
             int temp = walkThroughAllPaths(pages[pageData[i] - 1]);
             if (temp < num) num = temp;
         }
@@ -30,7 +32,21 @@ public class Main {
             pages[i] = pageData;
         }
 
-        System.out.println("\n" + walkThroughAllPaths(pages[0]));
+        pagesCopy = pages.clone();
+        pagesCopy[0] = null;
 
+        int shortestPathNum = walkThroughAllPaths(pages[0]);
+
+        boolean reachesAllpages = true;
+        for(int[] page:pagesCopy) {
+            if(page != null) {
+                reachesAllpages = false;
+                break;
+            }
+        }
+
+        if(reachesAllpages) System.out.println("Y");
+        else System.out.println("N");
+        System.out.println(shortestPathNum);
     }
 }
