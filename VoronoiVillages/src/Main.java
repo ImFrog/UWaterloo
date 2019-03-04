@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -12,10 +13,6 @@ public class Main {
 
         Arrays.sort(villages);
 
-        for (int i: villages) {
-            System.out.println(i);
-        }
-
         double size = 0;
 
         for(int i = 1; i < villages.length - 1; i++) {
@@ -29,6 +26,7 @@ public class Main {
             if (neighborhoodSize < size) size = neighborhoodSize;
         }
 
-        System.out.println(size);
+        DecimalFormat df = new DecimalFormat("#.0");
+        System.out.println(df.format(size));
     }
 }
